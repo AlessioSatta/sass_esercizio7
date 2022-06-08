@@ -1,0 +1,81 @@
+@function random-hex() {
+    $hex: '#';
+
+    @for $i from 1 through 6 {
+        $rand: random(15);
+
+        @if $rand >9 {
+            @if $rand ==10 {
+                $hex: $hex +'A';
+            }
+
+            @else {
+                @if $rand ==11 {
+                    $hex: $hex +'B';
+                }
+
+                @else {
+                    @if $rand ==12 {
+                        $hex: $hex +'C';
+                    }
+
+                    @else {
+                        @if $rand ==13 {
+                            $hex: $hex +'D';
+                        }
+
+                        @else {
+                            @if $rand ==14 {
+                                $hex: $hex +'E';
+                            }
+
+                            @else {
+                                @if $rand ==15 {
+                                    $hex: $hex +'F';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @else {
+            $hex: $hex + $rand;
+        }
+    }
+    @return unquote($hex);
+}
+
+.box {
+    display: flex;
+    height: 330px;
+    width: 100%;
+}
+
+.bounce {
+    align-self: flex-end;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    height: 200px;
+    margin: 0 auto 0 auto;
+    transform-origin: bottom;
+    width: 200px;
+    animation-name: bounce;
+    animation-timing-function: linear;
+    border-radius: 50%;
+}
+
+.bg-color {
+    background-color: random-hex();
+}
+
+@mixin trasla($property) {
+    transform: translateY($property);
+  }  
+
+@keyframes bounce {
+    0% {@include trasla(0);}
+    40% {@include trasla(-130px);}
+    60% {@include trasla(calc(-130px / 2));}
+    100% {@include trasla(0)}
+}
